@@ -1,0 +1,178 @@
+# ExRec 默认配置文件
+# 所有模块通过此文件配置,消融实验复制此文件修改即可
+
+experiment:
+  name: "default_run"
+  seed: 42
+  log_dir: "./logs"
+  cache_dir: "./cache"
+
+# ============ 数据路径 ============
+data:
+  # 题目数据
+  question_file: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/high_school_annotated_clean.json"
+  qid_to_int_file: "/data/wushaowan/Project/ExRec/swan/data/xiaoma_kt/qid_to_int.json"
+  
+  # 嵌入数据
+  question_content_emb: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/embeddings/representation_learning_large/qid2content_sol_avg_emb.json"
+  question_int_emb: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/embeddings/qid2int_emb.json"
+  kc_emb: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/embeddings/kc_emb.json"
+  
+  # 交互序列
+  train_valid_seq: "/data/wushaowan/Project/ExRec/swan/data/xiaoma_kt/train_valid_sequences.csv"
+  test_seq: "/data/wushaowan/Project/ExRec/swan/data/xiaoma_kt/test_sequences.csv"
+  
+  # 嵌入维度(从数据中自动检测,这里只是默认值)
+  embedding_dim: 1024
+
+# ============ DKT 模拟器(pykt) ============
+dkt:
+  model_dir: "/data/wushaowan/Project/ExRec/swan/data/xiaoma_kt/saved_model/5d351099-0fed-419d-81e4-88f9b8c83fb2"
+  model_type: "dkt"   # pykt 支持: dkt/dkvmn/sakt/akt/...
+  device: "cuda:0"
+  batch_size: 32
+  max_seq_len: 200
+  # 掌握度阈值: 低于此值视为薄弱KC
+  weak_kc_threshold: 0.4
+  weak_kc_top_n: 5
+
+# ============ LLM Adapter ============
+llm:
+  # 选择默认后端: openai_compat / deepseek / modelscope / mock
+  default_backend: "deepseek"
+  
+  # 各后端配置(密钥从环境变量读)
+  backends:
+    openai_compat:
+      base_url: "http://localhost:8000/v1"  # vLLM 默认地址
+      api_key_env: "OPENAI_API_KEY"
+      model: "Qwen2.5-7B-Instruct"
+      timeout: 60
+      max_retries: 3
+    
+    deepseek:
+      base_url: "https://api.deepseek.com/v1"
+      api_key_env: "DEEPSEEK_API_KEY"
+      model: "deepseek-chat"
+      timeout: 60
+      max_retries: 3
+    
+    modelscope:
+      base_url: "https://api-inference.modelscope.cn/v1"
+      api_key_env: "MODELSCOPE_API_KEY"
+      model: "Qwen/Qwen2.5-72B-Instruct"
+      timeout: 60
+      max_retries: 3
+    
+    mock:
+      # mock 后端用于单测,返回固定结构
+      pass: true
+  
+  # 通用参数
+  temperature: 0.3      # 反思要稳定
+  max_tokens: 1024
+  
+  # 缓存设置
+  cache:
+    enable: true
+    cache_dir: "./cache/llm_cache"
+    # 同一 prompt hash 命中时直接返回,节省成本
+
+# ============ 学生 Agent ============
+student_agent:
+  # 学生画像生成器
+  profile:
+    use_llm: true            # 是否调LLM生成自然语言画像
+    weak_kc_top_n: 5         # 取掌握度最低的n个KC作为薄弱点
+  # 群体先验融合
+  group_prior:
+    enable: true
+    n_clusters: 8
+    fusion_alpha_mode: "adaptive"   # adaptive / fixed
+    fusion_alpha_fixed: 0.7         # fixed 模式下的个体权重
+
+# ============ 教师 Agent ============
+teacher_agent:
+  # 三级检索流水线
+  retrieval:
+    level1_pool_size: 200       # 结构化召回数量
+    level2_top_n: 50            # 向量精排数量
+    level3_top_k: 5             # LLM 最终返回数量
+  # 难度匹配
+  zpd:
+    # P(correct) 在此区间视为最近发展区
+    lower: 0.5
+    upper: 0.75
+  # 推荐多样性目标
+  diversity_target: 0.4
+
+# ============ 反思机制 (核心) ============
+reflection:
+  # 总开关(消融实验用)
+  enable: true
+  
+  # 反思触发阈值
+  triggers:
+    mae_high: 0.40
+    mae_medium: 0.25
+    mae_low: 0.15
+    kg_gap_high: 0.15
+    kg_gap_medium: 0.08
+  
+  # 经验检索
+  retrieval:
+    top_k: 3
+    min_confidence: 0.4
+    similarity_threshold: 0.6
+  
+  # 置信度演化
+  confidence:
+    decay_per_day: 0.99
+    retire_below: 0.20
+    dormant_below: 0.35
+  
+  # 经验合并
+  consolidation:
+    enable: true
+    interval: 100              # 每 N 次推荐执行一次合并
+    similarity_threshold: 0.9
+    min_cluster_size: 3
+    tag_overlap_threshold: 0.6
+  
+  # 持久化
+  persist:
+    path: "./experience_bank_storage/exp_bank.pkl"
+    autosave_interval: 50
+  
+  # 消融开关
+  ablation:
+    structured_delta: true     # false 时只用文本反思,不用结构化delta
+    confidence_update: true    # false 时反思永久有效
+    retrieval: true            # false 时用最近N条而不是检索
+    consolidation: true        # false 时不合并
+
+# ============ 评估 ============
+evaluation:
+  # 推荐列表长度
+  K_list: [1, 3, 5, 10, 20]
+  
+  # 评估指标开关
+  metrics:
+    ndcg_q: true
+    f1_q: true
+    hit_q: true
+    ndcg_kc: true
+    f1_kc: true
+    hit_kc: true
+    # 反思机制专属指标
+    kc_coverage: true
+    difficulty_match: true
+    expected_kg: true
+    diversity: true
+    # 反思系统观测指标
+    reflection_hit_rate: true
+    reflection_effect_rate: true
+  
+  # 测试规模(快速调试时调小)
+  max_students: 200
+  output_dir: "./logs/eval_results"

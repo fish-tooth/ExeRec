@@ -1,0 +1,11 @@
+# 消融实验: 完全关闭反思机制
+# 用法: python scripts/run_pipeline.py --config configs/ablation_no_reflection.yaml
+
+# 继承 default.yaml,只覆盖差异
+_base_: "default.yaml"
+
+experiment:
+  name: "ablation_no_reflection"
+
+reflection:
+  enable: false

@@ -1,0 +1,12 @@
+_base_: "default.yaml"
+
+experiment:
+  name: "ablation_flat_reflection"
+
+reflection:
+  enable: true
+  ablation:
+    structured_delta: false   # 关键:不使用结构化delta
+    confidence_update: true
+    retrieval: true
+    consolidation: true

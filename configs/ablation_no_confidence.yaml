@@ -1,0 +1,12 @@
+_base_: "default.yaml"
+
+experiment:
+  name: "ablation_no_confidence"
+
+reflection:
+  enable: true
+  ablation:
+    structured_delta: true
+    confidence_update: false   # 关键:反思永久有效
+    retrieval: true
+    consolidation: true
