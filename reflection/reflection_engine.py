@@ -180,15 +180,9 @@ class ReflectionEngine:
     # ============ JSON 解析 + 校验 ============
     @staticmethod
     def _parse_and_validate(content: str) -> Optional[Dict[str, Any]]:
-        content = content.strip()
-        # 兼容 ```json 包裹 或 文本中夹带 JSON
-        m = re.search(r"\{.*\}", content, re.DOTALL)
-        if m:
-            content = m.group(0)
-        
-        try:
-            data = json.loads(content)
-        except json.JSONDecodeError:
+        from utils import extract_json
+        data = extract_json(content)
+        if data is None or not isinstance(data, dict):
             return None
         
         # 字段校验 + 默认值

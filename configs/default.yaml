@@ -13,6 +13,9 @@ data:
   question_file: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/high_school_annotated_clean.json"
   qid_to_int_file: "/data/wushaowan/Project/ExRec/swan/data/xiaoma_kt/qid_to_int.json"
   
+  # KC 命名空间映射(★ 关键: 把 pykt 交互序列的数字 KC 映射成题库的中文 KC)
+  kc_to_int_file: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/metadata/kc_to_int.json"
+  
   # 嵌入数据
   question_content_emb: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/embeddings/representation_learning_large/qid2content_sol_avg_emb.json"
   question_int_emb: "/data/wushaowan/Project/ExRec/swan/data/xiaoma/embeddings/qid2int_emb.json"
@@ -51,9 +54,9 @@ llm:
       max_retries: 3
     
     deepseek:
-      base_url: "https://api.deepseek.com/v1"
+      base_url: "https://api.deepseek.com"
       api_key_env: "DEEPSEEK_API_KEY"
-      model: "deepseek-chat"
+      model: "deepseek-v4-pro"
       timeout: 60
       max_retries: 3
     
@@ -95,9 +98,9 @@ student_agent:
 teacher_agent:
   # 三级检索流水线
   retrieval:
-    level1_pool_size: 200       # 结构化召回数量
-    level2_top_n: 50            # 向量精排数量
-    level3_top_k: 5             # LLM 最终返回数量
+    level1_pool_size: 400       # 结构化召回数量(增大,让 L1 不容易触发"放宽难度"兜底)
+    level2_top_n: 80            # 向量精排数量(给 MMR 留充足排序空间)
+    level3_top_k: 5             # LLM 精选数量(LLM 处理 5 道效果最好,剩余由 L2 填充)
   # 难度匹配
   zpd:
     # P(correct) 在此区间视为最近发展区
@@ -105,6 +108,9 @@ teacher_agent:
     upper: 0.75
   # 推荐多样性目标
   diversity_target: 0.4
+  # MMR 重排参数: λ ∈ [0,1], 越大越偏相关性, 越小越偏多样性
+  # 0.7 是公认相关性与多样性的平衡点; 论文里可消融
+  mmr_lambda: 0.7
 
 # ============ 反思机制 (核心) ============
 reflection:

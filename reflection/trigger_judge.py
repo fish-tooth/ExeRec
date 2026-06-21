@@ -49,17 +49,33 @@ class TriggerJudge:
         all_wrong = sum(simulated_correct) == 0
         avg_pred = float(np.mean(predicted_probs))
         
+        # 预测全 0.5 = 教师 Agent L3 走了 fallback,预测无信息
+        # 此时 MAE 必然约 0.5,不该触发"高严重度反思"(浪费 LLM 调用)
+        pred_array = np.asarray(predicted_probs, dtype=np.float64)
+        pred_is_degenerate = bool(
+            np.std(pred_array) < 1e-6 and abs(pred_array.mean() - 0.5) < 1e-3
+        )
+        
         debug = {
             "mae": mae,
             "kg_gap": kg_gap,
             "all_correct": all_correct,
             "all_wrong": all_wrong,
             "avg_pred": avg_pred,
+            "pred_is_degenerate": pred_is_degenerate,
         }
+        
+        if pred_is_degenerate:
+            # 预测无信息,无法用 MAE 判断推荐质量
+            # 仍可用 kg_gap 判断,但不基于 MAE
+            if kg_gap >= self.kg_gap_high:
+                return True, "high", debug
+            if kg_gap >= self.kg_gap_medium:
+                return True, "medium", debug
+            return False, "none", debug
         
         # ---- 高严重度 ----
         if (all_wrong and avg_pred > 0.5) or (all_correct and avg_pred < 0.5):
-            # 全错且预测乐观,或全对且预测悲观: 都是系统性偏差
             return True, "high", debug
         if mae >= self.mae_high or kg_gap >= self.kg_gap_high:
             return True, "high", debug

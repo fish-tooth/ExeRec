@@ -1,0 +1,225 @@
+  "n_students": 199,
+  "difficulty_match@1_mean": 0.7085427135678392,
+  "difficulty_match@1_std": 0.4544336438004587,
+  "difficulty_match@10_mean": 0.6776381909547738,
+  "difficulty_match@10_std": 0.38403868508299843,
+  "difficulty_match@20_mean": 0.6756281407035175,
+  "difficulty_match@20_std": 0.3834252080867604,
+  "difficulty_match@3_mean": 0.6700167504187605,
+  "difficulty_match@3_std": 0.39502765100334886,
+  "difficulty_match@5_mean": 0.6756281407035175,
+  "difficulty_match@5_std": 0.38352348960760885,
+  "diversity@1_mean": 1.0,
+  "diversity@1_std": 0.0,
+  "diversity@10_mean": 0.9763819095477387,
+  "diversity@10_std": 0.1125089605560324,
+  "diversity@20_mean": 0.9763819095477387,
+  "diversity@20_std": 0.1125089605560324,
+  "diversity@3_mean": 0.9865996649916249,
+  "diversity@3_std": 0.06330904920926049,
+  "diversity@5_mean": 0.9763819095477387,
+  "diversity@5_std": 0.1125089605560324,
+  "expected_kg@1_mean": 0.5655418637673294,
+  "expected_kg@1_std": 0.39897899885054483,
+  "expected_kg@10_mean": 0.5743615452709452,
+  "expected_kg@10_std": 0.3600802355344671,
+  "expected_kg@20_mean": 0.5743615452709452,
+  "expected_kg@20_std": 0.3600802355344671,
+  "expected_kg@3_mean": 0.5775188686954871,
+  "expected_kg@3_std": 0.36405996620421455,
+  "expected_kg@5_mean": 0.5743615452709452,
+  "expected_kg@5_std": 0.3600802355344671,
+  "f1_kc@1_mean": 0.035260756100021114,
+  "f1_kc@1_std": 0.07914753688598469,
+  "f1_kc@10_mean": 0.06674978655022354,
+  "f1_kc@10_std": 0.11616336232061868,
+  "f1_kc@20_mean": 0.06636278621131804,
+  "f1_kc@20_std": 0.11587536373081175,
+  "f1_kc@3_mean": 0.05548343087074939,
+  "f1_kc@3_std": 0.1049467189763496,
+  "f1_kc@5_mean": 0.06664810751240753,
+  "f1_kc@5_std": 0.11607708104681412,
+  "f1_q@1_mean": 0.0030740509449845603,
+  "f1_q@1_std": 0.029181447523438233,
+  "f1_q@10_mean": 0.008358051088877274,
+  "f1_q@10_std": 0.038074872454019505,
+  "f1_q@20_mean": 0.008358051088877274,
+  "f1_q@20_std": 0.038074872454019505,
+  "f1_q@3_mean": 0.0058642265294952195,
+  "f1_q@3_std": 0.032969751779530966,
+  "f1_q@5_mean": 0.008358051088877274,
+  "f1_q@5_std": 0.038074872454019505,
+  "hit_kc@1_mean": 0.2562814070351759,
+  "hit_kc@1_std": 0.4365790277180598,
+  "hit_kc@10_mean": 0.4472361809045226,
+  "hit_kc@10_std": 0.4972081851643833,
+  "hit_kc@20_mean": 0.45226130653266333,
+  "hit_kc@20_std": 0.49771579957444756,
+  "hit_kc@3_mean": 0.39195979899497485,
+  "hit_kc@3_std": 0.48818778658093637,
+  "hit_kc@5_mean": 0.4472361809045226,
+  "hit_kc@5_std": 0.4972081851643833,
+  "hit_q@1_mean": 0.02512562814070352,
+  "hit_q@1_std": 0.15650664826530084,
+  "hit_q@10_mean": 0.07537688442211055,
+  "hit_q@10_std": 0.2639985032475115,
+  "hit_q@20_mean": 0.07537688442211055,
+  "hit_q@20_std": 0.2639985032475115,
+  "hit_q@3_mean": 0.05527638190954774,
+  "hit_q@3_std": 0.2285189346914989,
+  "hit_q@5_mean": 0.07537688442211055,
+  "hit_q@5_std": 0.2639985032475115,
+  "kc_coverage@1_mean": 0.3128140703517588,
+  "kc_coverage@1_std": 0.23755268255263898,
+  "kc_coverage@10_mean": 0.4685929648241206,
+  "kc_coverage@10_std": 0.2520888216896141,
+  "kc_coverage@20_mean": 0.4685929648241206,
+  "kc_coverage@20_std": 0.2520888216896141,
+  "kc_coverage@3_mean": 0.4364321608040202,
+  "kc_coverage@3_std": 0.251611557864717,
+  "kc_coverage@5_mean": 0.4685929648241206,
+  "kc_coverage@5_std": 0.2520888216896141,
+  "n_recommended_mean": 4.396984924623116,
+  "n_recommended_std": 2.9362045981136573,
+  "ndcg_kc@1_mean": 0.2562814070351759,
+  "ndcg_kc@1_std": 0.4365790277180598,
+  "ndcg_kc@10_mean": 0.17059025130096325,
+  "ndcg_kc@10_std": 0.24403898470810625,
+  "ndcg_kc@20_mean": 0.1204697613263286,
+  "ndcg_kc@20_std": 0.1833572205806501,
+  "ndcg_kc@3_mean": 0.2548494920494508,
+  "ndcg_kc@3_std": 0.36961079297928595,
+  "ndcg_kc@5_mean": 0.25438774153440874,
+  "ndcg_kc@5_std": 0.35626791137665176,
+  "ndcg_q@1_mean": 0.02512562814070352,
+  "ndcg_q@1_std": 0.15650664826530084,
+  "ndcg_q@10_mean": 0.016276621371952023,
+  "ndcg_q@10_std": 0.06727976598149406,
+  "ndcg_q@20_mean": 0.01122497911724993,
+  "ndcg_q@20_std": 0.048168081767727175,
+  "ndcg_q@3_mean": 0.02394653586426443,
+  "ndcg_q@3_std": 0.1084441930135501,
+  "ndcg_q@5_mean": 0.024020910599146055,
+  "ndcg_q@5_std": 0.09873425719685945,
+  "used_experience_count_mean": 0.24623115577889448,
+  "used_experience_count_std": 0.4958859558813626,
+  "reflection_apply_rate": 0.21608040201005024,
+  "elapsed_seconds": 7009.361706495285
+
+观察指标有什么问题,再改进算法提升指标ndcg,f1,hit和kc_coverage
+
+
+
+
+
+
+
+
+
+
+
+
+
+(exrec0620) wushaowan@hs:~/Project/ExRec0620$ head -5 logs/trace_default_run.jsonl | python -c "
+
+import json, sys
+
+for line in sys.stdin:
+
+    r = json.loads(line)
+
+    print(f\"student={r['student_id']}: n_rec={r.get('n_recommended')}, strategy={r.get('strategy_label')}, weak_kcs={r['weak_kcs'][:3]}, severity={r['severity']}\")
+
+"
+
+student=test_s_0: n_rec=None, strategy=None, weak_kcs=['KC', '0', '1'], severity=high
+
+student=test_s_1: n_rec=None, strategy=None, weak_kcs=['KC', '0', '1'], severity=high
+
+student=test_s_2: n_rec=None, strategy=None, weak_kcs=['KC', '0', '1'], severity=high
+
+student=109_1108: n_rec=None, strategy=None, weak_kcs=['元素与集合的关系', '椭圆的简单几何性质', '双曲线的标准方程'], severity=high
+
+student=109_1202: n_rec=None, strategy=None, weak_kcs=['函数图像的作法与识别', '幂函数的概念', '集合中元素的特性'], severity=high
+
+
+
+(exrec0620) wushaowan@hs:~/Project/ExRec0620$ grep -iE "empty|fallback|warn|放宽" logs/default_run_*.log | tail -15
+
+logs/default_run_20260621_130434.log:2026-06-21 14:56:08,131 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: {
+
+logs/default_run_20260621_130434.log:2026-06-21 14:57:50,669 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 14:58:24,390 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 14:58:57,365 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 14:59:35,547 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 15:00:13,705 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 15:00:50,580 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 15:01:23,269 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_130434.log:2026-06-21 15:01:59,338 | WARNING | reflection.engine         | Failed to parse reflection JSON, content snippet: 
+
+logs/default_run_20260621_202349.log:2026-06-21 20:24:08,016 | INFO    | data.interaction          | KC remap complete: 674399/1320232 steps got Chinese KCs, used bank fallback for 38511 steps, unmapped KC IDs: 904 (first 10: ['20367', '20194', '1201', '20814', '20566', '1145', '20266', '19939', '20404', '20852'])
+
+logs/default_run_20260621_202349.log:2026-06-21 20:24:08,636 | INFO    | data.interaction          | KC remap complete: 137258/273243 steps got Chinese KCs, used bank fallback for 7993 steps, unmapped KC IDs: 874 (first 10: ['20367', '20194', '1201', '20814', '20566', '1145', '20266', '19939', '20404', '20852'])
+
+logs/default_run_20260621_202349.log:2026-06-21 20:24:23,533 | WARNING | student.dkt               | pykt init_model failed: DKT.__init__() got an unexpected keyword argument 'hidden_size'; using fallback
+
+logs/default_run_20260621_203945.log:2026-06-21 20:40:03,904 | INFO    | data.interaction          | KC remap complete: 674399/1320232 steps got Chinese KCs, used bank fallback for 38511 steps, unmapped KC IDs: 904 (first 10: ['21216', '25269', '34848', '34971', '20345', '34907', '34981', '20577', '1146', '20814'])
+
+logs/default_run_20260621_203945.log:2026-06-21 20:40:04,505 | INFO    | data.interaction          | KC remap complete: 137258/273243 steps got Chinese KCs, used bank fallback for 7993 steps, unmapped KC IDs: 874 (first 10: ['21216', '25269', '34848', '34971', '20345', '34907', '34981', '20577', '1146', '20814'])
+
+logs/default_run_20260621_203945.log:2026-06-21 20:40:19,358 | WARNING | student.dkt               | pykt init_model failed: DKT.__init__() got an unexpected keyword argument 'hidden_size'; using fallback
+
+
+
+(exrec0620) wushaowan@hs:~/Project/ExRec0620$ head -5 logs/trace_default_run.jsonl | python -c "
+
+import json, sys
+
+labels = []
+
+for line in sys.stdin:
+
+    r = json.loads(line)
+
+    labels.append(r.get('strategy_label', ''))
+
+print('strategy_labels:', labels)
+
+print('如果都是 fallback,说明 mock LLM 的输出格式不对,真实 LLM 应该正常')
+
+"
+
+strategy_labels: ['', '', '', '', '']
+
+如果都是 fallback,说明 mock LLM 的输出格式不对,真实 LLM 应该正常
+
+
+
+(exrec0620) wushaowan@hs:~/Project/ExRec0620$ head -5 logs/trace_default_run.jsonl | python -c "
+
+import json, sys
+
+for line in sys.stdin:
+
+    r = json.loads(line)
+
+    print(f\"n_rec={r.get('n_recommended')}, strategy={r.get('strategy_label')}\")
+
+"
+
+n_rec=None, strategy=None
+
+n_rec=None, strategy=None
+
+n_rec=None, strategy=None
+
+n_rec=None, strategy=None
+
+n_rec=None, strategy=None

@@ -44,6 +44,22 @@ def build_all(cfg: dict):
     itx_train = InteractionLoader(cfg["data"]["train_valid_seq"])
     itx_test = InteractionLoader(cfg["data"]["test_seq"])
     
+    # ★ 关键: 把 CSV 中的数字 KC 替换为题库的中文 KC
+    # 否则 weak_kcs 与 QuestionBank.kc_to_qids 命名空间不对齐,
+    # 检索/反思/评估全失效
+    kc_to_int_file = cfg["data"].get("kc_to_int_file")
+    if kc_to_int_file:
+        logger.info(f"Remapping interaction KCs via {kc_to_int_file}...")
+        itx_train.attach_kc_mapping(kc_to_int_file, question_bank=qb)
+        itx_test.attach_kc_mapping(kc_to_int_file, question_bank=qb)
+    else:
+        logger.warning(
+            "cfg.data.kc_to_int_file not configured; falling back to bank-only remap. "
+            "Recommendation/evaluation may be degraded due to KC namespace mismatch."
+        )
+        itx_train.attach_question_bank(qb)
+        itx_test.attach_question_bank(qb)
+    
     logger.info("Loading embeddings...")
     es = EmbeddingStore(
         question_content_emb_path=cfg["data"]["question_content_emb"],
@@ -168,8 +184,9 @@ def run_pipeline(cfg: dict):
     # 详细 trace 日志
     log_dir = Path(cfg["experiment"]["log_dir"])
     log_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
     trace_logger = JsonlLogger(
-        str(log_dir / f"trace_{cfg['experiment']['name']}.jsonl")
+        str(log_dir / f"trace_{cfg['experiment']['name']}_{timestamp}.jsonl")
     )
     
     # 测试学生
@@ -256,6 +273,8 @@ def run_pipeline(cfg: dict):
                     "ability": profile.ability_level,
                     "n_relevant_exps": len(relevant_exps),
                     "applied_exp_ids": recommendation["applied_experience_ids"],
+                    "n_recommended": len(recommendation["questions"]),  # ★ 诊断
+                    "strategy_label": recommendation.get("strategy_label", ""),  # ★ 诊断
                     "recommended_qids": recommendation["questions"],
                     "predicted_correct_rates": recommendation["predicted_correct_rates"],
                     "simulated_correct": sim_result["simulated_correct"],

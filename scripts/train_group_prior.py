@@ -38,6 +38,15 @@ def main():
     )
     itx_train = InteractionLoader(cfg["data"]["train_valid_seq"])
     itx_test = InteractionLoader(cfg["data"]["test_seq"])
+    
+    # ★ KC 命名空间对齐(与 run_pipeline.py 保持一致)
+    kc_to_int_file = cfg["data"].get("kc_to_int_file")
+    if kc_to_int_file:
+        logger.info(f"Remapping interaction KCs via {kc_to_int_file}...")
+        itx_train.attach_kc_mapping(kc_to_int_file, question_bank=qb)
+        itx_test.attach_kc_mapping(kc_to_int_file, question_bank=qb)
+    else:
+        logger.warning("cfg.data.kc_to_int_file missing; group prior may be noisy")
     es = EmbeddingStore(
         question_content_emb_path=cfg["data"]["question_content_emb"],
         question_int_emb_path=cfg["data"]["question_int_emb"],

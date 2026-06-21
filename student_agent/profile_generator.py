@@ -79,14 +79,9 @@ class ProfileGenerator:
     @staticmethod
     def _parse(content: str) -> Dict[str, str]:
         """解析 LLM 返回的 JSON"""
-        # 兼容 ```json 包裹
-        content = content.strip()
-        m = re.search(r"\{.*\}", content, re.DOTALL)
-        if m:
-            content = m.group(0)
-        try:
-            data = json.loads(content)
-        except json.JSONDecodeError:
+        from utils import extract_json
+        data = extract_json(content)
+        if data is None or not isinstance(data, dict):
             return ProfileGenerator._fallback([], 0.5, 0.5)
         
         return {

@@ -6,6 +6,7 @@ Evaluator
 """
 import json
 from pathlib import Path
+import time
 from typing import List, Dict, Optional
 from collections import defaultdict
 import numpy as np
@@ -157,14 +158,16 @@ class Evaluator:
         return agg
     
     def save(self, summary: dict, name: str = "eval_summary"):
+
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
         """保存详细 rounds 和聚合结果"""
         out_dir = Path(self.output_dir)
         out_dir.mkdir(parents=True, exist_ok=True)
         
-        with open(out_dir / f"{name}_rounds.json", "w", encoding="utf-8") as f:
+        with open(out_dir / f"{name}_rounds_{timestamp}.json", "w", encoding="utf-8") as f:
             json.dump(self.rounds, f, ensure_ascii=False, indent=2, default=str)
         
-        with open(out_dir / f"{name}_summary.json", "w", encoding="utf-8") as f:
+        with open(out_dir / f"{name}_summary_{timestamp}.json", "w", encoding="utf-8") as f:
             json.dump(summary, f, ensure_ascii=False, indent=2, default=str)
         
         logger.info(f"Evaluation saved to {out_dir}")
